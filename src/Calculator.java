@@ -5,7 +5,7 @@ public class Calculator {
 
 	public static void main(String[] args) {
 		LocalDateTime myObj = LocalDateTime.now(); // Create a date object
-	    System.out.println(myObj);
+	    	System.out.println(myObj);
 		System.out.println("Hello Dan! Welcome to your basic calculator");
 		Scanner usrInput = new Scanner(System.in); // for usr inputs
 		
