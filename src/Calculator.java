@@ -1,68 +1,119 @@
 import java.util.Scanner;
-import java.time.LocalDateTime;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class Calculator {
-
-	public static void main(String[] args) {
-		LocalDateTime myObj = LocalDateTime.now(); // Create a date object
-	    System.out.println(myObj);
-		System.out.println("Hello Dan! Welcome to your basic calculator");
-		Scanner usrInput = new Scanner(System.in); // for usr inputs
+	public static void main(String[] args) throws ScriptException {
+		Mortgage myObj = new Mortgage();
+		//myObj.main(args);
 		
-		double input1, input2;	//for usr i/p 1,2 and result
 		
-		double result = 0; 
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		
-		System.out.println("what\'d you like to perform? (*,/,-,+, ^(sqrt), 2(square)");
-		char mathOperator = usrInput.next().charAt(0); // for math operation
+		System.out.println("What'd you like to do today? enter /a for expressions caclulation /n b for others");
+		Scanner scanner = new Scanner(System.in);
+		String expression = scanner.nextLine();
+		boolean repeat = true;
 		
-		if (mathOperator == '+' || mathOperator == '-' || mathOperator == '*' || mathOperator == '/') {
-			System.out.print("enter first number: ");
-			input1 =  usrInput.nextDouble();
-			
-			System.out.print("enter second number: ");
-			input2 = usrInput.nextDouble();
-			
-			switch(mathOperator)
-			{
-			case '*':
-				result = input1*input2;
+		while (repeat) {
+			switch(expression.toUpperCase()) {
+			case "A":
+				firstMethod();
 				break;
-			
-			case '/':
-				result = input1/input2;
+			case "B":
+				secondMethod();
 				break;
-			
-			case '+':
-				result = input1+input2;
+			case "C":
+				MortgageCalculator.main(args);
+				break;
+			default:
+				System.out.println("you probably mistyped! \n");
+				//String loop = "null";
+				main(null);
 				break;
 				
-			case '-':
-				result = input1-input2;
-				break;
 			}
-			
-		} else if (mathOperator == '^' || mathOperator == '2') {
-			
-			System.out.print("enter number: ");
-			input1 =  usrInput.nextDouble();
-			
-			switch(mathOperator)
-			{
-			case '^':  // sqrt
-				result = Math.sqrt(input1);
-				break;
-			
-			case '2':
-				result = input1*input1;
-				break;
-			}
-		} else {
-			System.out.println("Enter a valid operator");
+		}			
+	}
+	
+	static void firstMethod() throws ScriptException {
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
+		
+		System.out.println("Enter the expression");
+		Scanner scanner = new Scanner(System.in);
+		String expression = scanner.nextLine();
+		double result = 0;
+		double a,b;
+		
+		try {
+			System.out.println("Answer is "+engine.eval(expression));
+		} catch (Exception e) {
+			System.out.println("You probably mistyped! go again!");
 		}
+		main(null);
+	}
+	
+	static void secondMethod() throws ScriptException {
 			
-		usrInput.close();		
-		System.out.println(result);
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
+		double a, b;
+		double result = 0;
+		
+		System.out.println("Enter an operator");
+		Scanner scanner = new Scanner(System.in);
+		String operatorValue = scanner.nextLine();
+		String operator = String.valueOf(operatorValue).toUpperCase();
+		
+		//while (1==1) {
+			switch(operator.toUpperCase()) {
+			case "+":
+			case "-":
+			case "*":
+			case "/":
+				System.out.println("Enter 1st num");
+				a =  scanner.nextDouble();
+				System.out.println("Enter second number");
+				b = scanner.nextDouble();
+				result = Double.parseDouble(String.valueOf(engine.eval(a + operator + b)));
+				System.out.println("Result of " + a + operator + b +" is " + result);
+				break;
+				
+			case "SQRT":	
+			//case "sqrt":
+				System.out.println("Enter a number to find its square root");
+				a = scanner.nextDouble();
+				result = Double.parseDouble(String.valueOf(engine.eval("Math.sqrt(a)")));
+				System.out.println("Square root of "+ a + " is " + result);
+				break;
+			
+			case "SQUARE":
+			//case "square":
+				System.out.println("Enter a number to find it's square: ");
+				a = scanner.nextDouble();
+				result = Math.pow(a,2);
+				System.out.println("Square of "+ a + " is " + result);
+				break;
+			
+			case "EXPONENT":
+			//case "exponent":
+				System.out.println("Enter the number: ");
+				a = scanner.nextDouble();
+				System.out.println("Enter it's exponent: ");
+				b = scanner.nextDouble();
+				result = Math.pow(a,b);
+				System.out.println("Result of  "+ a+ " raised to "+ b + " is " + result);
+				break;
+			
+			default:
+				System.out.println("Your probably mistyped! Have at it bro");
+			}
+		//}
+		main(null);
 		
 	}
 }
