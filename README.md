@@ -1,2 +1,2 @@
 # Calculator-Java
-Basic Calculator with square and sqrt() functionalty
+Calculator with square, square root, exponent and mortgage functionality
