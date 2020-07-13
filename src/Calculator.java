@@ -13,7 +13,9 @@ public class Calculator {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		
-		System.out.println("What'd you like to do today? enter /a for expressions caclulation /n b for others");
+		System.out.println("What'd you like to do today? \nenter /'a' for simple one line expressions caclulation"
+				+ "\n'b' for normal math, square, square root and Exponent calculations,"
+				+ "\nand 'c' for mortgage calculations");
 		Scanner scanner = new Scanner(System.in);
 		String expression = scanner.nextLine();
 		boolean repeat = true;
@@ -110,7 +112,7 @@ public class Calculator {
 				break;
 			
 			default:
-				System.out.println("Your probably mistyped! Have at it bro");
+				System.out.println("Your probably mistyped! Have at it again!");
 			}
 		//}
 		main(null);

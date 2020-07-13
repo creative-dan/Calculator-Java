@@ -2,8 +2,10 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.script.ScriptException;
+
 public class MortgageCalculator {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ScriptException {
 
 		Scanner input = new Scanner(System.in);
 		Locale indiaLocale = new Locale("en", "IN");						// set indian locale
@@ -35,6 +37,7 @@ public class MortgageCalculator {
 		// the term of the loan
 
 		balanceLeft(principal, term, interestRate, monthlyPayment);
+		Calculator.main(args);
 	}
 
 	public double calMonthlyPay(int principal, int term, double interestRate) {		
